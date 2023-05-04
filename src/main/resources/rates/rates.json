@@ -1,0 +1,17 @@
+[
+  {
+    "curFrom": "USD",
+    "curTo": "RUR",
+    "value": 82.51
+  },
+  {
+    "curFrom": "RUR",
+    "curTo": "USD",
+    "value": 0.012
+  },
+  {
+    "curFrom": "EUR",
+    "curTo": "RUR",
+    "value": 86.52
+  }
+]
