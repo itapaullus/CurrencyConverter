@@ -1,10 +1,11 @@
-package implementations;
+import converter.SimpleCurrencyConverter;
+import rateprovider.JsonExchangeRateProvider;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SimpleCurrencyConverterTest {
+class SimpleCurrencyConverterTestApp {
     private SimpleCurrencyConverter converter;
 
     @org.junit.jupiter.api.BeforeEach
@@ -18,7 +19,7 @@ class SimpleCurrencyConverterTest {
     }
 
     @org.junit.jupiter.api.Test
-    void convert() throws IOException {
+    void convert() {
         //test converting USD to RUR
         double result = converter.convert("USD", "RUR", 1000.);
         assertEquals(82510.,result, 0.01);

@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class CurrencyPair {
 
-    public String curFrom;
-    public String curTo;
+    public final String curFrom;
+    public final String curTo;
 
     public CurrencyPair(String curFrom, String curTo) {
         this.curFrom = curFrom;
