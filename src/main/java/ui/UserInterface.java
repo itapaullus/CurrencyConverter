@@ -5,7 +5,7 @@ public interface UserInterface {
     void ShowMenu();
     Action getAction();
 
-    String getCurrency();
+    String getCurrency(String message);
 
-    Double getAmount();
+    Double getAmount(String message);
 }

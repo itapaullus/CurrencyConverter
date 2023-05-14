@@ -18,6 +18,10 @@ public class InMemoryCurrencyRateRepository implements CurrencyRateRepository {
 
     @Override
     public double getRate(CurrencyPair pair) {
-        return rates.get(pair);
+        try {
+            return rates.get(pair);
+        } catch (NullPointerException e) {
+            return Double.NaN;
+        }
     }
 }

@@ -38,8 +38,9 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
             JSONArray rates = new JSONArray(new String(jsonData));
             for (int i = 0; i < rates.length(); i++) {
                 JSONObject rate = rates.getJSONObject(i);
-                exchangeRates.put(new CurrencyPair(rate.getString("curFrom"),
-                                rate.getString("curTo")),
+                exchangeRates.put(new CurrencyPair(
+                        rate.getString("curFrom"),
+                        rate.getString("curTo")),
                         rate.getDouble("value"));
             }
             this.rates = new InMemoryCurrencyRateRepository(exchangeRates);

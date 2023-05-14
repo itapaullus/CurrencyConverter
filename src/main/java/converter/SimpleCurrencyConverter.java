@@ -9,8 +9,13 @@ public class SimpleCurrencyConverter implements CurrencyConverter {
     }
 
     @Override
-    public double convert(String curFrom, String curTo, Double amount) {
+    public double convert(String curFrom, String curTo, Double amount) throws IllegalArgumentException{
         Double rate = provider.getRate(curFrom, curTo);
-        return amount * rate;
+        if (!rate.isNaN()) {
+            return amount * rate;
+        }
+        else {
+            throw new IllegalArgumentException("No such currency pair found!");
+        }
     }
 }

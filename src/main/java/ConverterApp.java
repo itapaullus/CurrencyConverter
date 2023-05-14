@@ -15,7 +15,15 @@ public class ConverterApp {
             if (action.equals(Action.Quit)) {
                 break;
             } else if (action.equals(Action.ExchangeCurrency)) {
-                System.out.println(converter.convert(ui.getCurrency(), ui.getCurrency(), ui.getAmount()));
+                try {
+                    System.out.println(converter.convert(
+                            ui.getCurrency("Enter a currency to convert from"),
+                            ui.getCurrency("Enter a currency to convert from"),
+                            ui.getAmount("Enter an amount to convert")));
+                }
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }

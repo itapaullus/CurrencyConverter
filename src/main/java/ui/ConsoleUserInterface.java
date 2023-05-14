@@ -28,14 +28,14 @@ public class ConsoleUserInterface implements UserInterface {
     }
 
     @Override
-    public String getCurrency() {
-        System.out.println("Enter a currency:");
+    public String getCurrency(String message) {
+        System.out.println(message);
         return scanner.next();
     }
 
     @Override
-    public Double getAmount() {
-        System.out.println("Enter an amount:");
+    public Double getAmount(String message) {
+        System.out.println(message);
         return scanner.nextDouble();
     }
 }
