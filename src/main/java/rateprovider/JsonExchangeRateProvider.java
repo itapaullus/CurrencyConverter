@@ -6,11 +6,13 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Currency;
 import model.CurrencyPair;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import repository.CurrencyRateRepository;
 import repository.InMemoryCurrencyRateRepository;
+import repository.NoRateException;
 
 public class JsonExchangeRateProvider implements ExchangeRateProvider {
     private final String filename;
@@ -21,13 +23,12 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
         parseExchangeRates();
     }
 
-    @Override
-    public Double getRate(CurrencyPair pair) {
+    private Double getRate(CurrencyPair pair) throws NoRateException {
         return rates.getRate(pair);
     }
 
     @Override
-    public Double getRate(String curFrom, String curTo) {
+    public Double getRate(Currency curFrom, Currency curTo) throws NoRateException {
         return getRate(new CurrencyPair(curFrom, curTo));
     }
 
@@ -38,9 +39,10 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
             JSONArray rates = new JSONArray(new String(jsonData));
             for (int i = 0; i < rates.length(); i++) {
                 JSONObject rate = rates.getJSONObject(i);
-                exchangeRates.put(new CurrencyPair(
-                        rate.getString("curFrom"),
-                        rate.getString("curTo")),
+                Currency curFrom = Currency.fromString(rate.getString("curFrom"));
+                Currency curTo = Currency.fromString(rate.getString("curTo"));
+                exchangeRates.put(
+                        new CurrencyPair(curFrom, curTo),
                         rate.getDouble("value"));
             }
             this.rates = new InMemoryCurrencyRateRepository(exchangeRates);

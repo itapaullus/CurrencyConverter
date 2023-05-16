@@ -1,16 +1,6 @@
 package model;
 
-import java.util.Objects;
-
-public class CurrencyPair {
-
-    private final String curFrom;
-    private final String curTo;
-
-    public CurrencyPair(String curFrom, String curTo) {
-        this.curFrom = curFrom;
-        this.curTo = curTo;
-    }
+public record CurrencyPair(Currency curFrom, Currency curTo) {
 
     //cross pairs are equals regardless of currencies order
     @Override
@@ -22,10 +12,5 @@ public class CurrencyPair {
             return false;
         }
         return (this.curTo.equals(other.curTo) & this.curFrom.equals(other.curFrom));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.curFrom, this.curTo);
     }
 }

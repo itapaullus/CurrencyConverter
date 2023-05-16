@@ -1,5 +1,5 @@
 package converter;
 
 public interface CurrencyConverter {
-    double convert (String curFrom, String curTo, Double Amount);
+    double convert (Double Amount, Double rate);
 }

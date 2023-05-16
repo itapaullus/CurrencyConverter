@@ -1,12 +1,15 @@
 package ui;
 
+import model.Currency;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleUserInterface implements UserInterface {
-    Scanner scanner = new Scanner(System.in);
+    final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public void ShowMenu() {
+    public void showMenu() {
         System.out.println("Choose an option:");
         System.out.println("    C: Convert currency");
         System.out.println("    Q: Quit");
@@ -14,28 +17,29 @@ public class ConsoleUserInterface implements UserInterface {
 
     @Override
     public Action getAction() {
-        Action result = null;
         String cmd = scanner.next();
-        if (cmd.equalsIgnoreCase("Q")) {
-            result = Action.Quit;
-        } else if (cmd.equalsIgnoreCase("C")) {
-            result = Action.ExchangeCurrency;
-        } else {
-            System.out.println("Bad input, try again");
-            getAction();
-        }
-        return result;
+        return Action.fromString(cmd);
     }
 
     @Override
-    public String getCurrency(String message) {
+    public Currency getCurrency(String message) {
         System.out.println(message);
-        return scanner.next();
+        return Currency.fromString(scanner.next());
     }
 
     @Override
     public Double getAmount(String message) {
         System.out.println(message);
-        return scanner.nextDouble();
+        try {
+            return scanner.nextDouble();
+        }
+        catch (InputMismatchException e) {
+            throw new IllegalArgumentException("Bad amount");
+        }
+    }
+
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 }

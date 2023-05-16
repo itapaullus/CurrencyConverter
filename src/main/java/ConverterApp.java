@@ -1,29 +1,38 @@
 import converter.CurrencyConverter;
-import converter.SimpleCurrencyConverter;
-import rateprovider.JsonExchangeRateProvider;
+import model.Currency;
+import rateprovider.ExchangeRateProvider;
+import repository.NoRateException;
 import ui.Action;
-import ui.ConsoleUserInterface;
 import ui.UserInterface;
 
 public class ConverterApp {
-    public static void app() {
-        CurrencyConverter converter = new SimpleCurrencyConverter(new JsonExchangeRateProvider("src/main/resources/rates/rates.json"));
-        UserInterface ui = new ConsoleUserInterface();
+    private final CurrencyConverter converter;
+    private final ExchangeRateProvider provider;
+    private final UserInterface ui;
+
+    public ConverterApp(CurrencyConverter converter,
+                        ExchangeRateProvider provider,
+                        UserInterface ui) {
+        this.provider = provider;
+        this.converter = converter;
+        this.ui = ui;
+    }
+
+    public void app() {
         while (true) {
-            ui.ShowMenu();
-            Action action = ui.getAction();
-            if (action.equals(Action.Quit)) {
-                break;
-            } else if (action.equals(Action.ExchangeCurrency)) {
-                try {
-                    System.out.println(converter.convert(
-                            ui.getCurrency("Enter a currency to convert from"),
-                            ui.getCurrency("Enter a currency to convert from"),
-                            ui.getAmount("Enter an amount to convert")));
+            try {
+                ui.showMenu();
+                Action action = ui.getAction();
+                if (action.equals(Action.QUIT)) {
+                    break;
+                } else if (action.equals(Action.EXCHANGE_CURRENCY)) {
+                    Currency curFrom = ui.getCurrency("Enter currency to convert from");
+                    Currency curTo = ui.getCurrency("Enter currency to convert to");
+                    double result = converter.convert(ui.getAmount("enter Amount"), provider.getRate(curFrom, curTo));
+                    ui.showMessage("Your converted amount is " + curTo + " " + result);
                 }
-                catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
+            } catch (IllegalArgumentException | NoRateException e) {
+                ui.showMessage(e.getMessage());
             }
         }
     }

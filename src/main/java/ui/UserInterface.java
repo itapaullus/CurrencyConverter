@@ -1,11 +1,16 @@
 package ui;
 
+import model.Currency;
+
 public interface UserInterface {
 
-    void ShowMenu();
+    void showMenu();
+
     Action getAction();
 
-    String getCurrency(String message);
+    Currency getCurrency(String message);
 
     Double getAmount(String message);
+
+    void showMessage(String message);
 }

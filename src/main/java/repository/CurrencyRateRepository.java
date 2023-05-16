@@ -1,8 +1,8 @@
 package repository;
 
+import model.Currency;
 import model.CurrencyPair;
 
 public interface CurrencyRateRepository {
-    double getRate(String curFrom, String CurTo);
-    double getRate(CurrencyPair pair);
+    double getRate(CurrencyPair pair) throws NoRateException;
 }

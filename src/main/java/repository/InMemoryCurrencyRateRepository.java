@@ -12,16 +12,11 @@ public class InMemoryCurrencyRateRepository implements CurrencyRateRepository {
     }
 
     @Override
-    public double getRate(String curFrom, String curTo) {
-        return getRate(new CurrencyPair(curFrom, curTo));
-    }
-
-    @Override
-    public double getRate(CurrencyPair pair) {
+    public double getRate(CurrencyPair pair) throws NoRateException {
         try {
             return rates.get(pair);
         } catch (NullPointerException e) {
-            return Double.NaN;
+            throw new NoRateException("Exchange rate for currency pair "+pair.curFrom()+"/"+pair.curTo()+" doesn't exist");
         }
     }
 }
