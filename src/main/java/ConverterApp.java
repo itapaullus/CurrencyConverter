@@ -1,8 +1,8 @@
 import converter.CurrencyConverter;
-import model.Currency;
 import rateprovider.ExchangeRateProvider;
-import repository.NoRateException;
+import rateprovider.NoRateException;
 import ui.Action;
+import ui.InvalidAction;
 import ui.UserInterface;
 
 public class ConverterApp {
@@ -25,13 +25,13 @@ public class ConverterApp {
                 Action action = ui.getAction();
                 if (action.equals(Action.QUIT)) {
                     break;
-                } else if (action.equals(Action.EXCHANGE_CURRENCY)) {
-                    Currency curFrom = ui.getCurrency("Enter currency to convert from");
-                    Currency curTo = ui.getCurrency("Enter currency to convert to");
+                } else if (action.equals(Action.EXCHANGE)) {
+                    String curFrom = ui.getCurrency("Enter currency to convert from");
+                    String curTo = ui.getCurrency("Enter currency to convert to");
                     double result = converter.convert(ui.getAmount("enter Amount"), provider.getRate(curFrom, curTo));
                     ui.showMessage("Your converted amount is " + curTo + " " + result);
                 }
-            } catch (IllegalArgumentException | NoRateException e) {
+            } catch (IllegalArgumentException | NoRateException | InvalidAction e) {
                 ui.showMessage(e.getMessage());
             }
         }

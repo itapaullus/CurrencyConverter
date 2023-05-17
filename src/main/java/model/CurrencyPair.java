@@ -1,6 +1,6 @@
 package model;
 
-public record CurrencyPair(Currency curFrom, Currency curTo) {
+public record CurrencyPair(String curFrom, String curTo) {
 
     //cross pairs are equals regardless of currencies order
     @Override

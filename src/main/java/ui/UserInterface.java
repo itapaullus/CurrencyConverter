@@ -1,14 +1,12 @@
 package ui;
 
-import model.Currency;
-
 public interface UserInterface {
 
     void showMenu();
 
-    Action getAction();
+    Action getAction() throws InvalidAction;
 
-    Currency getCurrency(String message);
+    String getCurrency(String message);
 
     Double getAmount(String message);
 
