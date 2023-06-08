@@ -26,7 +26,7 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
         }
         result = rates.get(pair);
         if (result == null) {
-            throw new NoRateException("Currency pair "+pair.curFrom()+"/"+pair.curTo()+" doesn't exists");
+            throw new NoRateException("Currency pair "+pair.getCurFrom()+"/"+pair.getCurTo()+" doesn't exists");
         }
         else {
             return result;

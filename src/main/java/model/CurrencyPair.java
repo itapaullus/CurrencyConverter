@@ -1,16 +1,14 @@
 package model;
 
-public record CurrencyPair(String curFrom, String curTo) {
+import lombok.Data;
 
-    //cross pairs are equals regardless of currencies order
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof CurrencyPair other)) {
-            return false;
-        }
-        return (this.curTo.equals(other.curTo) & this.curFrom.equals(other.curFrom));
+@Data
+public class CurrencyPair {
+    String curFrom;
+    String curTo;
+
+    public CurrencyPair(String curFrom, String curTo) {
+        this.curFrom = curFrom;
+        this.curTo = curTo;
     }
 }
