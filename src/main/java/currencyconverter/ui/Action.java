@@ -1,4 +1,4 @@
-package ui;
+package currencyconverter.ui;
 
 public enum Action {
     EXCHANGE,

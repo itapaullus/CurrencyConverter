@@ -1,4 +1,4 @@
-package ui;
+package currencyconverter.ui;
 
 public class InvalidAction extends Exception{
     public InvalidAction(String message) {

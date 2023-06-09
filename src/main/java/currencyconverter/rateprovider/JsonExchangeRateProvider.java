@@ -1,4 +1,4 @@
-package rateprovider;
+package currencyconverter.rateprovider;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,15 +6,19 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.CurrencyPair;
+import currencyconverter.model.CurrencyPair;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
+
+@Component
 public class JsonExchangeRateProvider implements ExchangeRateProvider {
     private final String filename;
     private Map<CurrencyPair, Double> rates;
 
-    public JsonExchangeRateProvider(String filename) {
+    public JsonExchangeRateProvider(@Value("${filename}") String filename) {
         this.filename = filename;
         this.rates = new HashMap<>();
     }
@@ -26,7 +30,7 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
         }
         result = rates.get(pair);
         if (result == null) {
-            throw new NoRateException("Currency pair "+pair.curFrom()+"/"+pair.curTo()+" doesn't exists");
+            throw new NoRateException("Currency pair "+pair.getCurFrom()+"/"+pair.getCurTo()+" doesn't exists");
         }
         else {
             return result;
@@ -40,6 +44,7 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
 
     private void parseExchangeRates() {
         try {
+            System.out.println(filename);
             byte[] jsonData = Files.readAllBytes(Paths.get(filename));
             JSONArray jsonArray = new JSONArray(new String(jsonData));
             for (int i = 0; i < jsonArray.length(); i++) {

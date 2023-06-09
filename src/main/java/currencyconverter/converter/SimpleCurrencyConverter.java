@@ -1,5 +1,8 @@
-package converter;
+package currencyconverter.converter;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SimpleCurrencyConverter implements CurrencyConverter {
 
     @Override
