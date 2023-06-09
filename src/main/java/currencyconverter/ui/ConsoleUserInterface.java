@@ -1,4 +1,4 @@
-package ui;
+package currencyconverter.ui;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

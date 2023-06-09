@@ -1,10 +1,10 @@
-import converter.CurrencyConverter;
+import currencyconverter.converter.CurrencyConverter;
 import org.springframework.stereotype.Component;
-import rateprovider.ExchangeRateProvider;
-import rateprovider.NoRateException;
-import ui.Action;
-import ui.InvalidAction;
-import ui.UserInterface;
+import currencyconverter.rateprovider.ExchangeRateProvider;
+import currencyconverter.rateprovider.NoRateException;
+import currencyconverter.ui.Action;
+import currencyconverter.ui.InvalidAction;
+import currencyconverter.ui.UserInterface;
 @Component
 public class ConverterApp {
     private final CurrencyConverter converter;

@@ -1,4 +1,4 @@
-package model;
+package currencyconverter.model;
 
 import lombok.Data;
 

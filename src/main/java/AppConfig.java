@@ -1,15 +1,15 @@
-import converter.CurrencyConverter;
-import converter.SimpleCurrencyConverter;
+import currencyconverter.converter.CurrencyConverter;
+import currencyconverter.converter.SimpleCurrencyConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import rateprovider.ExchangeRateProvider;
-import rateprovider.JsonExchangeRateProvider;
-import ui.ConsoleUserInterface;
-import ui.UserInterface;
+import currencyconverter.rateprovider.ExchangeRateProvider;
+import currencyconverter.rateprovider.JsonExchangeRateProvider;
+import currencyconverter.ui.ConsoleUserInterface;
+import currencyconverter.ui.UserInterface;
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = {"currencyconverter"})
 public class AppConfig {
     @Bean
     public ExchangeRateProvider exchangeRateProvider() {

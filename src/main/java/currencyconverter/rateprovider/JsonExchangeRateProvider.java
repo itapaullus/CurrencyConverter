@@ -1,4 +1,4 @@
-package rateprovider;
+package currencyconverter.rateprovider;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import model.CurrencyPair;
+import currencyconverter.model.CurrencyPair;
 import org.json.JSONObject;
 import org.json.JSONArray;
 

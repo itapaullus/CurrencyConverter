@@ -1,4 +1,4 @@
-package rateprovider;
+package currencyconverter.rateprovider;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package converter;
+package currencyconverter.converter;
 
 public class SimpleCurrencyConverter implements CurrencyConverter {
 
