@@ -9,12 +9,16 @@ import java.util.Map;
 import currencyconverter.model.CurrencyPair;
 import org.json.JSONObject;
 import org.json.JSONArray;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
+
+@Component
 public class JsonExchangeRateProvider implements ExchangeRateProvider {
     private final String filename;
     private Map<CurrencyPair, Double> rates;
 
-    public JsonExchangeRateProvider(String filename) {
+    public JsonExchangeRateProvider(@Value("${filename}") String filename) {
         this.filename = filename;
         this.rates = new HashMap<>();
     }
@@ -40,6 +44,7 @@ public class JsonExchangeRateProvider implements ExchangeRateProvider {
 
     private void parseExchangeRates() {
         try {
+            System.out.println(filename);
             byte[] jsonData = Files.readAllBytes(Paths.get(filename));
             JSONArray jsonArray = new JSONArray(new String(jsonData));
             for (int i = 0; i < jsonArray.length(); i++) {

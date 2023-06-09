@@ -1,8 +1,11 @@
 package currencyconverter.ui;
 
+import org.springframework.stereotype.Component;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@Component
 public class ConsoleUserInterface implements UserInterface {
     final Scanner scanner = new Scanner(System.in);
 
